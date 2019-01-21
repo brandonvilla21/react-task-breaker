@@ -19,7 +19,12 @@ const SearchBar = (props) => {
   const { classes } = props
   const [value, setValue] = useState('')
   const handleChange = (event) => setValue(event.target.value)
-  const handleKeyPress = ({ key }) => key === 'Enter' && props.onClose(value)
+  const handleKeyPress = ({ key }) =>{
+    if (key === 'Enter') {
+      props.onClose(value)
+      setValue('')
+    }
+  }
 
   return (
     <Dialog className={classes.dialog} open={props.open}>
@@ -31,6 +36,7 @@ const SearchBar = (props) => {
         onChange={handleChange}
         onKeyPress={handleKeyPress}
         margin="normal"
+        tabIndex={0}
       />
     </Dialog>
   )
